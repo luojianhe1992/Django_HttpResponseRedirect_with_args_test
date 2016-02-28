@@ -65,12 +65,23 @@
                         <a href=""><button>Delete the foo</button></a>
                     </td>
                     <td>
-                        <a href=""><button>Edit the book</button></a>
+                        <a href="{% url 'edit_foo' foo.id %}"><button>Edit the foo</button></a>
                     </td>
                 </tr>
             </table>
         </div>
     </div>
+
+    <hr>
+
+    <h2><a href="{% url 'show_foos' %}"><button>Show all the foos</button></a></h2>
+
+    <hr>
+
+    <h2><a href="{% url 'message' %}"><button>Back to message page.</button></a></h2>
+
+    <hr>
+
 </div>
 
 <h3>
