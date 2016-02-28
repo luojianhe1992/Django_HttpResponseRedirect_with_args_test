@@ -1,0 +1,112 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static "WebApp/css/bootstrap.css" %}" type="text/css">
+    <link rel="stylesheet" href="{% static "WebApp/css/result.css" %}" type="text/css">
+    <script src="{% static "WebApp/js/d3.min.js" %}"></script>
+    <script src="{% static "WebApp/js/dimple.v2.1.6.min.js" %}"></script>
+</head>
+
+<body>
+<div id="nav">
+    <div id="logo">
+        <a href="{% url 'index' %}"><img src="{% static "WebApp/img/logo.jpeg" %}" alt="logo"></a>
+    </div>
+    <ul id="navi">
+        <li class="navMenu"><a href="{% url 'honeycell' %}">HoneyCell</a></li>
+        <li class="navMenu"><a href="{% url 'upload' %}">New Task</a></li>
+        <li class="navMenu"><a href="{% url 'preprocess' %}">Preprocessing</a></li>
+        <li class="navMenu"><a href="{% url 'analytics' %}">Analytics</a></li>
+        <li class="navMenu"><a href="{% url 'visualization' %}">Visualization</a></li>
+        <li class="navMenu"><a href="{% url 'logout' %}">Logout</a></li>
+    </ul>
+</div>
+
+<h2 class="log"> Hello {{ user }} </h2>
+
+<br>
+
+<div class="container">
+    <div class="row" align="center">
+
+        <h2 align="center">This is show_foos page.</h2>
+
+        <div class="table-responsive">
+            <table class="table table-hover" border="3">
+                <col width="10%">
+                <col width="10%">
+                <col width="20%">
+                <col width="20%">
+                <col width="10%">
+                <col width="10%">
+                <col width="10%">
+
+                <thead>
+                <tr>
+                    <th colspan="7"><h3 align="center">Here are all the foos.</h3></th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <t>
+                    <td><label>Foo name</label></td>
+                    <td><label>Foo description</label></td>
+                    <td><label>Foo time created</label></td>
+                    <td><label>Foo time changed</label></td>
+                    <td><label>Detail</label></td>
+                    <td><label>Edit</label></td>
+                    <td><label>Delete</label></td>
+                </t>
+                {% for foo in foos %}
+                    <tr>
+                        <td>{{ foo.foo_name }}</td>
+                        <td>{{ foo.foo_description }}</td>
+                        <td>{{ foo.foo_time_created }}</td>
+                        <td>{{ foo.foo_time_changed }}</td>
+                        <td><a href="{% url 'foo_detail' foo.id %}">
+                            <button>Detail</button>
+                        </a></td>
+                        <td><a href="{% url 'edit_foo' foo.id %}">
+                            <button>Edit</button>
+                        </a></td>
+                        <td><a href="">
+                            <button>Delete</button>
+                        </a></td>
+                    </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+
+        <hr>
+
+        <h2 align="center"><a href="{% url 'add_foo' %}">
+            <button>Back to add foo</button>
+        </a></h2>
+
+        <hr>
+
+        <h2 align="center"><a href="{% url 'message' %}">
+            <button>Back to save book</button>
+        </a></h2>
+
+        <hr>
+
+    </div>
+</div>
+
+<h3>
+    Welcome to HoneyCell WebServer!
+</h3>
+<form method="get" action="{% url 'logout' %}">{% csrf_token %}
+    <p>
+        <button type="submit">Log Out</button>
+    </p>
+</form>
+
+</body>
+</html>
+
